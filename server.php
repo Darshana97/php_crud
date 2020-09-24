@@ -5,6 +5,7 @@
     $name = "";
     $address = "";
     $id = 0;
+    $edit_state = false;
 
     $db = mysqli_connect("localhost","root","","crud");
 
@@ -17,6 +18,18 @@
         $_SESSION['msg'] = "Address saved";
         header('location: index.php');
 
+
+    }
+
+
+    if (isset($_POST['update'])) {
+        $name = mysql_real_escape_string($_POST['name']);
+        $address = mysql_real_escape_string($_POST['address']);
+        $id = mysql_real_escape_string($_POST['id']);
+
+        mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
+        $_SESSION['msg'] = "Address updated";
+        header('location: index.php');
 
     }
 

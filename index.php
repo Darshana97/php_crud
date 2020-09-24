@@ -1,5 +1,16 @@
 <?php 
     include('server.php'); 
+
+    if (isset($_GET['edit'])) {
+        $id = $_GET['edit'];
+        $edit_state = true;
+        $rec = mysqli_query($db, "SELECT * FROM info WHERE id=$id");
+        $record = mysqli_fetch_array($rec);
+        $name = $record['name'];
+        $address = $record['address'];
+        $id = $record['id'];
+    }
+
 ?>
 
 
@@ -40,7 +51,7 @@
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['address']; ?></td>
                         <td>
-                            <a href="#">Edit</a>
+                            <a href="index.php?edit=<?php echo $row['id']; ?>">Edit</a>
                         </td>
                         <td>
                             <a href="#">Delete</a>
@@ -52,16 +63,24 @@
         </tbody>
     </table>
     <form method="post" action="server.php">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="input-group">
             <label>Name</label>
-            <input type="text" name="name">
+            <input type="text" name="name" value="<?php echo $name; ?>">
         </div>
         <div class="input-group">
             <label>Address</label>
-            <input type="text" name="address">
+            <input type="text" name="address" value="<?php echo $address; ?>">
         </div>
         <div class="input-group">
-            <button type="submit" name="save" class="btn">Save</button>
+
+                <?php if($edit_state == false): ?>
+                    <button type="submit" name="save" class="btn">Save</button>
+                <?php else: ?>
+                    <button type="submit" name="update" class="btn">Update</button>
+
+                <?php endif ?>
+            
         </div>
     </form>
 </body>
