@@ -12,6 +12,18 @@
     <title>Todo App</title>
 </head>
 <body>
+
+    <?php if(isset($_SESSION['msg'])): ?>
+        <div class="msg">
+            <?php 
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+             ?>
+        </div>
+   
+
+    <?php endif ?>
+
     <table>
         <thead>
             <tr>
@@ -21,16 +33,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Darshana</td>
-                <td>Kandy</td>
-                <td>
-                    <a href="#">Edit</a>
-                </td>
-                <td>
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
+            <?php
+
+                while ($row = mysqli_fetch_array($results)) { ?>
+                    <tr>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['address']; ?></td>
+                        <td>
+                            <a href="#">Edit</a>
+                        </td>
+                        <td>
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>
+               <?php }
+
+            ?>
         </tbody>
     </table>
     <form method="post" action="server.php">
