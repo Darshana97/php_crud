@@ -51,10 +51,10 @@
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['address']; ?></td>
                         <td>
-                            <a href="index.php?edit=<?php echo $row['id']; ?>">Edit</a>
+                            <a class="edit_btn" href="index.php?edit=<?php echo $row['id']; ?>">Edit</a>
                         </td>
                         <td>
-                            <a href="#">Delete</a>
+                            <a class="del_btn" href="server.php?del=<?php echo $row['id']; ?>">Delete</a>
                         </td>
                     </tr>
                <?php }
