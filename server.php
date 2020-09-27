@@ -23,9 +23,9 @@
 
 
     if (isset($_POST['update'])) {
-        $name = mysql_real_escape_string($_POST['name']);
-        $address = mysql_real_escape_string($_POST['address']);
-        $id = mysql_real_escape_string($_POST['id']);
+        $name = mysqli_real_escape_string($db,$_POST['name']);
+        $address = mysqli_real_escape_string($db,$_POST['address']);
+        $id = mysqli_real_escape_string($db,$_POST['id']);
 
         mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
         $_SESSION['msg'] = "Address updated";
